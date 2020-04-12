@@ -12,7 +12,12 @@
             <span class="help-block"
                   *ngIf="!signUpForm.get('userData.username').valid &&
                   signUpForm.get('userData.username').touched">
-              Please enter a valid username!
+              <span *ngIf="signUpForm.get('userData.username').errors['nameIsForbidden']">
+                The username is invalid!
+              </span>
+              <span *ngIf="signUpForm.get('userData.username').errors['required']">
+                The username is required!
+              </span>
           </span>
           </div>
           <div class="form-group">
@@ -24,7 +29,12 @@
             <span class="help-block"
                   *ngIf="!signUpForm.get('userData.email').valid &&
                    signUpForm.get('userData.email').touched">
-              Please enter a valid email address!
+              <span *ngIf="signUpForm.get('userData.email').errors['email']">
+                The email is invalid!
+              </span>
+              <span *ngIf="signUpForm.get('userData.email').errors['required']">
+                The email is required!
+              </span>
           </span>
           </div>
         </div>
