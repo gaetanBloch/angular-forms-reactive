@@ -29,12 +29,29 @@ export class AppComponent implements OnInit {
       gender: new FormControl(this.defaultGender),
       hobbies: new FormArray([])
     });
+
+    // Changes hooks
     // this.signUpForm.valueChanges.subscribe(
     //   (value) => console.log(value)
     // );
     this.signUpForm.statusChanges.subscribe(
       (status) => console.log(status)
     );
+
+    // Prepopulate the whole form or part of the form
+    this.signUpForm.setValue({
+      userData: {
+        username: 'Max',
+        email: 'max@test.com'
+      },
+      gender: 'male',
+      hobbies: []
+    });
+    this.signUpForm.patchValue({
+      userData: {
+        username: 'Jack'
+      }
+    });
   }
 
   onAddHobby(): void {
@@ -67,5 +84,14 @@ export class AppComponent implements OnInit {
 
   onSubmit(): void {
     console.log(this.signUpForm);
+    // this.signUpForm.reset();
+    this.signUpForm.reset({
+      userData: {
+        username: '',
+        email: ''
+      },
+      gender: this.defaultGender,
+      hobbies: []
+    });
   }
 }
