@@ -8,6 +8,7 @@ import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from '
 })
 export class AppComponent implements OnInit {
   readonly defaultGender = 'male';
+  readonly forbiddenUserNames = ['Chris', 'Anna'];
   genders = [this.defaultGender, 'female', 'other'];
   signUpForm: FormGroup;
 
@@ -15,7 +16,7 @@ export class AppComponent implements OnInit {
     this.signUpForm = new FormGroup({
       userData: new FormGroup(
         {
-          username: new FormControl(null, Validators.required),
+          username: new FormControl(null, [Validators.required, this.forbiddenNames.bind(this)]),
           email: new FormControl(null, [Validators.required, Validators.email]),
         }
       ),
@@ -35,5 +36,12 @@ export class AppComponent implements OnInit {
 
   onSubmit(): void {
     console.log(this.signUpForm);
+  }
+
+  forbiddenNames(control: FormControl): { [s: string]: boolean } {
+    if (this.forbiddenUserNames.indexOf(control.value) !== -1) {
+      return {nameIsForbidden: true};
+    }
+    return null;
   }
 }
