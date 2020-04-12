@@ -29,10 +29,13 @@
             <span class="help-block"
                   *ngIf="!signUpForm.get('userData.email').valid &&
                    signUpForm.get('userData.email').touched">
-              <span *ngIf="signUpForm.get('userData.email').errors['email']">
+              <span *ngIf="signUpForm.get('userData.email').errors &&
+              (signUpForm.get('userData.email').errors['email'] ||
+              signUpForm.get('userData.email').errors['emailIsForbidden'])">
                 The email is invalid!
               </span>
-              <span *ngIf="signUpForm.get('userData.email').errors['required']">
+              <span *ngIf="signUpForm.get('userData.email').errors &&
+              signUpForm.get('userData.email').errors['required']">
                 The email is required!
               </span>
           </span>
