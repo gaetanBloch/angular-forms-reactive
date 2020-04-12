@@ -9,3 +9,7 @@ input.ng-invalid.ng-touched {
 .help-block {
   color: red;
 }
+
+.btn-default {
+  margin-bottom: 15px;
+}
